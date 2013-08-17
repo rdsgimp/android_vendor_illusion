@@ -5,7 +5,7 @@
 
 export C=/tmp/backupdir
 export S=/system
-export V=Slim-4.3
+export V=Illusion-4.3
 
 # Preserve /system/addon.d in /tmp/addon.d
 preserve_addon_d() {
@@ -20,9 +20,9 @@ restore_addon_d() {
   rm -rf /tmp/addon.d/
 }
 
-# Check for proper Slim version
+# Check for proper Illusion version
 check_version() {
-  if ( ! grep -q "ro.slim.version=$V.*" /system/build.prop); then
+  if ( ! grep -q "ro.illusion.version=$V.*" /system/build.prop); then
     echo "Not running backup from incompatible version"
     exit
   fi

@@ -2,6 +2,6 @@
 #
 # Print startup info
 #
-L="log -p i -t slim"
+L="log -p i -t illusion"
 
-$L "Welcome to Android `getprop ro.build.version.release` / SlimBean `getprop ro.slim.version`";
+$L "Welcome to Android `getprop ro.build.version.release` / IllusionProject `getprop ro.illusion.version`";

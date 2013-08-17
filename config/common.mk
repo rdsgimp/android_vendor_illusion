@@ -15,29 +15,29 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Backup Tool
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/bin/backuptool.sh:system/bin/backuptool.sh \
-    vendor/slim/prebuilt/common/bin/backuptool.functions:system/bin/backuptool.functions \
-    vendor/slim/prebuilt/common/bin/50-slim.sh:system/addon.d/50-slim.sh \
-    vendor/slim/prebuilt/common/bin/99-backup.sh:system/addon.d/99-backup.sh \
-    vendor/slim/prebuilt/common/etc/backup.conf:system/etc/backup.conf
+    vendor/illusion/prebuilt/common/bin/backuptool.sh:system/bin/backuptool.sh \
+    vendor/illusion/prebuilt/common/bin/backuptool.functions:system/bin/backuptool.functions \
+    vendor/illusion/prebuilt/common/bin/50-illusion.sh:system/addon.d/50-illusion.sh \
+    vendor/illusion/prebuilt/common/bin/99-backup.sh:system/addon.d/99-backup.sh \
+    vendor/illusion/prebuilt/common/etc/backup.conf:system/etc/backup.conf
 
-# SLIM-specific init file
+# ILLUSION-specific init file
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/etc/init.local.rc:root/init.slim.rc
+    vendor/illusion/prebuilt/common/etc/init.local.rc:root/init.illusion.rc
 
 # Copy latinime for gesture typing
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/lib/libjni_latinime.so:system/lib/libjni_latinime.so
+    vendor/illusion/prebuilt/common/lib/libjni_latinime.so:system/lib/libjni_latinime.so
 
 # Compcache/Zram support
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/bin/compcache:system/bin/compcache \
-    vendor/slim/prebuilt/common/bin/handle_compcache:system/bin/handle_compcache
+    vendor/illusion/prebuilt/common/bin/compcache:system/bin/compcache \
+    vendor/illusion/prebuilt/common/bin/handle_compcache:system/bin/handle_compcache
 
 # Audio Config for DSPManager
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/vendor/etc/audio_effects.conf:system/vendor/etc/audio_effects.conf
-#LOCAL SLIM CHANGES  - END
+    vendor/illusion/prebuilt/common/vendor/etc/audio_effects.conf:system/vendor/etc/audio_effects.conf
+#LOCAL ILLUSION CHANGES  - END
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -45,28 +45,29 @@ PRODUCT_COPY_FILES += \
 
 # Don't export PS1 in /system/etc/mkshrc.
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/etc/mkshrc:system/etc/mkshrc \
-    vendor/slim/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf
+    vendor/illusion/prebuilt/common/etc/mkshrc:system/etc/mkshrc \
+    vendor/illusion/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf
 
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
-    vendor/slim/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit \
-    vendor/slim/prebuilt/common/bin/sysinit:system/bin/sysinit
+    vendor/illusion/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
+    vendor/illusion/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit \
+    vendor/illusion/prebuilt/common/bin/sysinit:system/bin/sysinit
 
-# Workaround for NovaLauncher zipalign fails
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/app/NovaLauncher.apk:system/app/NovaLauncher.apk
+    vendor/illusion/prebuilt/common/app/Illusion.apk:system/app/Illusion.apk
 
 # Embed SuperUser
 SUPERUSER_EMBEDDED := true
 
 # Required packages
 PRODUCT_PACKAGES += \
-    Camera \
+    Focal \
     Development \
+    LatinIME \
     SpareParts \
     Superuser \
-    su
+    su \
+    Trebuchet
 
 # Optional packages
 PRODUCT_PACKAGES += \
@@ -79,11 +80,15 @@ PRODUCT_PACKAGES += \
 
 # Extra Optional packages
 PRODUCT_PACKAGES += \
-    DashClock \
-    SlimFileManager \
-    SlimCenter \
+    audio_effects.conf \
+    DSPManager \
+    FileManager \
+    HALO \
     LatinIME \
-    SlimIRC
+    libcyanogen-dsp \
+    LockClock \
+    VoicePlus
+
 
 # Extra tools
 PRODUCT_PACKAGES += \
@@ -92,10 +97,10 @@ PRODUCT_PACKAGES += \
     mke2fs \
     tune2fs
 
-PRODUCT_PACKAGE_OVERLAYS += vendor/slim/overlay/common
+PRODUCT_PACKAGE_OVERLAYS += vendor/illusion/overlay/common
 
 # T-Mobile theme engine
-include vendor/slim/config/themes_common.mk
+include vendor/illusion/config/themes_common.mk
 
 # Boot animation include
 ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
@@ -109,7 +114,7 @@ TARGET_BOOTANIMATION_SIZE := $(shell \
   fi )
 
 # get a sorted list of the sizes
-bootanimation_sizes := $(subst .zip,, $(shell ls vendor/slim/prebuilt/common/bootanimation))
+bootanimation_sizes := $(subst .zip,, $(shell ls vendor/illusion/prebuilt/common/bootanimation))
 bootanimation_sizes := $(shell echo -e $(subst $(space),'\n',$(bootanimation_sizes)) | sort -rn)
 
 # find the appropriate size and set
@@ -126,7 +131,7 @@ endef
 $(foreach size,$(bootanimation_sizes), $(call check_and_set_bootanimation,$(size)))
 
 PRODUCT_COPY_FILES += \
-    vendor/slim/prebuilt/common/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip:system/media/bootanimation.zip
+    vendor/illusion/prebuilt/common/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip:system/media/bootanimation.zip
 endif
 
 # Versioning System
@@ -134,21 +139,21 @@ endif
 PRODUCT_VERSION_MAJOR = 4.3
 PRODUCT_VERSION_MINOR = build
 PRODUCT_VERSION_MAINTENANCE = beta.2
-ifdef SLIM_BUILD_EXTRA
-    SLIM_POSTFIX := -$(SLIM_BUILD_EXTRA)
+ifdef ILLUSION_BUILD_EXTRA
+    ILLUSION_POSTFIX := -$(ILLUSION_BUILD_EXTRA)
 endif
-ifndef SLIM_BUILD_TYPE
-    SLIM_BUILD_TYPE := UNOFFICIAL
+ifndef ILLUSION_BUILD_TYPE
+    ILLUSION_BUILD_TYPE := UNOFFICIAL
     PLATFORM_VERSION_CODENAME := UNOFFICIAL
-    SLIM_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
+    ILLUSION_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
 endif
 
 # Set all versions
-SLIM_VERSION := Slim-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(SLIM_BUILD_TYPE)$(SLIM_POSTFIX)
-SLIM_MOD_VERSION := Slim-$(SLIM_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(SLIM_BUILD_TYPE)$(SLIM_POSTFIX)
+ILLUSION_VERSION := Slim-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(ILLUSION_BUILD_TYPE)$(ILLUSION_POSTFIX)
+ILLUSION_MOD_VERSION := Slim-$(ILLUSION_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(ILLUSION_BUILD_TYPE)$(ILLUSION_POSTFIX)
 
 PRODUCT_PROPERTY_OVERRIDES += \
     BUILD_DISPLAY_ID=$(BUILD_ID) \
-    slim.ota.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE) \
-    ro.slim.version=$(SLIM_VERSION) \
-    ro.modversion=$(SLIM_MOD_VERSION)
+    illusion.ota.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE) \
+    ro.illusion.version=$(ILLUSION_VERSION) \
+    ro.modversion=$(ILLUSION_MOD_VERSION)

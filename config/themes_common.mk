@@ -5,4 +5,4 @@ PRODUCT_PACKAGES += \
        com.tmobile.themes
 
 PRODUCT_COPY_FILES += \
-       vendor/slim/config/permissions/com.tmobile.software.themes.xml:system/etc/permissions/com.tmobile.software.themes.xml
+       vendor/illusion/config/permissions/com.tmobile.software.themes.xml:system/etc/permissions/com.tmobile.software.themes.xml
