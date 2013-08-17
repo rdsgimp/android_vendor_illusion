@@ -96,6 +96,7 @@ PRODUCT_PACKAGES += \
 
 # Extra tools
 PRODUCT_PACKAGES += \
+    AndroidASync \
     openvpn \
     e2fsck \
     gson \
