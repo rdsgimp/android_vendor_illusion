@@ -98,6 +98,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     openvpn \
     e2fsck \
+    gson \
+    ion \
     mke2fs \
     tune2fs
 
