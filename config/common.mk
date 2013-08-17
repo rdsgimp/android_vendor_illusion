@@ -89,6 +89,10 @@ PRODUCT_PACKAGES += \
     LockClock \
     VoicePlus
 
+# CM Hardware Abstraction Framework
+PRODUCT_PACKAGES += \
+    org.cyanogenmod.hardware \
+    org.cyanogenmod.hardware.xml
 
 # Extra tools
 PRODUCT_PACKAGES += \
