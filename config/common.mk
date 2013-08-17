@@ -99,6 +99,7 @@ PRODUCT_PACKAGES += \
     AndroidASync \
     openvpn \
     e2fsck \
+    exfat \
     gson \
     ion \
     mke2fs \
