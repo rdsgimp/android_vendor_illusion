@@ -165,3 +165,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     illusion.ota.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE) \
     ro.illusion.version=$(ILLUSION_VERSION) \
     ro.modversion=$(ILLUSION_MOD_VERSION)
+
+-include vendor/illusion/sepolicy/sepolicy.mk
