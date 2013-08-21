@@ -88,6 +88,7 @@ PRODUCT_PACKAGES += \
     LatinIME \
     libcyanogen-dsp \
     LockClock \
+    RoundR \
     VoicePlus
 
 # CM Hardware Abstraction Framework
