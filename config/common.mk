@@ -53,6 +53,11 @@ PRODUCT_COPY_FILES += \
     vendor/illusion/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit \
     vendor/illusion/prebuilt/common/bin/sysinit:system/bin/sysinit
 
+# Prebuilt packages
+PRODUCT_COPY_FILES += \
+    vendor/illusion/prebuilt/common/app/Blue.apk:system/app/Blue.apk \
+    vendor/illusion/prebuilt/common/app/RoundR.apk:system/app/RoundR.apk
+
 # Embed SuperUser
 SUPERUSER_EMBEDDED := true
 
@@ -82,11 +87,9 @@ PRODUCT_PACKAGES += \
     DSPManager \
     FileManager \
     HALO \
-    IllusionBlue \
     LatinIME \
     libcyanogen-dsp \
     LockClock \
-    RoundR \
     VoicePlus
 
 # CM Hardware Abstraction Framework
