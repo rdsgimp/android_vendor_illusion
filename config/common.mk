@@ -53,9 +53,6 @@ PRODUCT_COPY_FILES += \
     vendor/illusion/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit \
     vendor/illusion/prebuilt/common/bin/sysinit:system/bin/sysinit
 
-PRODUCT_COPY_FILES += \
-    vendor/illusion/prebuilt/common/app/Illusion.apk:system/app/Illusion.apk
-
 # Embed SuperUser
 SUPERUSER_EMBEDDED := true
 
@@ -85,6 +82,7 @@ PRODUCT_PACKAGES += \
     DSPManager \
     FileManager \
     HALO \
+    IllusionBlue \
     LatinIME \
     libcyanogen-dsp \
     LockClock \
