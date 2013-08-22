@@ -55,7 +55,10 @@ PRODUCT_COPY_FILES += \
 
 # Prebuilt packages
 PRODUCT_COPY_FILES += \
-    vendor/illusion/prebuilt/common/app/Blue.apk:system/app/Blue.apk \
+    vendor/illusion/prebuilt/common/app/Blue.apk:system/app/Blue.apk
+PRODUCT_COPY_FILES += \
+    vendor/illusion/prebuilt/common/app/NovaLauncher.apk:system/app/NovaLauncher.apk
+PRODUCT_COPY_FILES += \
     vendor/illusion/prebuilt/common/app/RoundR.apk:system/app/RoundR.apk
 
 # Embed SuperUser
@@ -68,8 +71,7 @@ PRODUCT_PACKAGES += \
     LatinIME \
     SpareParts \
     Superuser \
-    su \
-    Trebuchet
+    su
 
 # Optional packages
 PRODUCT_PACKAGES += \
