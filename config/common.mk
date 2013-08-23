@@ -146,28 +146,36 @@ PRODUCT_COPY_FILES += \
     vendor/illusion/prebuilt/common/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip:system/media/bootanimation.zip
 endif
 
-# Versioning System
-# Prepare for 4.3 weekly beta.2
-PRODUCT_VERSION_MAJOR = 2
-PRODUCT_VERSION_MINOR = 5
-PRODUCT_VERSION_MAINTENANCE = alpha
-ifdef ILLUSION_BUILD_EXTRA
-    ILLUSION_POSTFIX := -$(ILLUSION_BUILD_EXTRA)
-endif
-ifndef ILLUSION_BUILD_TYPE
-    ILLUSION_BUILD_TYPE := UNOFFICIAL
-    PLATFORM_VERSION_CODENAME := UNOFFICIAL
-    ILLUSION_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
+# version
+RELEASE = false
+ILLUSION_VERSION_MAJOR = 2
+ILLUSION_VERSION_MINOR = 5
+ILLUSION_VERSION_MAINTENANCE = alpha
+
+# state
+ifeq ($(RELEASE),true)
+    ILLUSION_VERSION_STATE := OFFICIAL
+    ILLUSION_VERSION := Illusion-v$(ILLUSION_VERSION_MAJOR).$(ILLUSION_VERSION_MINOR).$(ILLUSION_VERSION_MAINTENANCE)-$(ILLUSION_VERSION_STATE)
+else
+    ILLUSION_VERSION_STATE := UNOFFICIAL
+    ILLUSION_VERSION := Illusion-v$(ILLUSION_VERSION_MAJOR).$(ILLUSION_VERSION_MINOR).$(ILLUSION_VERSION_MAINTENANCE)-$(ILLUSION_VERSION_STATE)
 endif
 
-# Set all versions
-ILLUSION_VERSION := Illusion-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(ILLUSION_POSTFIX)
-ILLUSION_MOD_VERSION := Illusion-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(ILLUSION_POSTFIX)
+# goo.im
+ifeq ($(RELEASE),true)
+    PRODUCT_PROPERTY_OVERRIDES += \
+        ro.goo.rom=illusionroms \
+        ro.goo.developerid=itsmikeramsay \
+        ro.goo.version=$(shell date +%Y%m%d)
+else
+    PRODUCT_PROPERTY_OVERRIDES += \
+        ro.goo.rom=illusionromsunofficial \
+        ro.goo.developerid=litsmikeramsay \
+        ro.goo.version=$(shell date +%Y%m%d)
+endif
 
+# product
 PRODUCT_PROPERTY_OVERRIDES += \
-    BUILD_DISPLAY_ID=$(BUILD_ID) \
-    illusion.ota.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE) \
-    ro.illusion.version=$(ILLUSION_VERSION) \
-    ro.modversion=$(ILLUSION_MOD_VERSION)
+    ro.illusion.version=$(ILLUSION_VERSION)
 
 -include vendor/illusion/sepolicy/sepolicy.mk
