@@ -161,21 +161,9 @@ else
     ILLUSION_VERSION := Illusion-v$(ILLUSION_VERSION_MAJOR).$(ILLUSION_VERSION_MINOR).$(ILLUSION_VERSION_MAINTENANCE)-$(ILLUSION_VERSION_STATE)
 endif
 
-# goo.im
-ifeq ($(RELEASE),true)
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ro.goo.rom=illusionroms \
-        ro.goo.developerid=itsmikeramsay \
-        ro.goo.version=$(shell date +%Y%m%d)
-else
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ro.goo.rom=illusionromsunofficial \
-        ro.goo.developerid=litsmikeramsay \
-        ro.goo.version=$(shell date +%Y%m%d)
-endif
-
 # product
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.illusion.version=$(ILLUSION_VERSION)
+    ro.illusion.version=$(ILLUSION_VERSION) \
+    ro.modversion=$(ILLUSION_VERSION)
 
 -include vendor/illusion/sepolicy/sepolicy.mk
