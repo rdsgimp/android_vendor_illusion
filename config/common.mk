@@ -11,7 +11,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.android.dataroaming=false
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.build.selinux=1
+    ro.build.selinux=1 \
+    persist.sys.root_access=1 
 
 # Backup Tool
 PRODUCT_COPY_FILES += \
@@ -150,32 +151,20 @@ endif
 RELEASE = false
 ILLUSION_VERSION_MAJOR = 2
 ILLUSION_VERSION_MINOR = 5
-ILLUSION_VERSION_MAINTENANCE = alpha
+ILLUSION_VERSION_MAINTENANCE = beta
 
 # state
 ifeq ($(RELEASE),true)
     ILLUSION_VERSION_STATE := OFFICIAL
-    ILLUSION_VERSION := Illusion-v$(ILLUSION_VERSION_MAJOR).$(ILLUSION_VERSION_MINOR).$(ILLUSION_VERSION_MAINTENANCE)-$(ILLUSION_VERSION_STATE)
+    ILLUSION_VERSION := $(TARGET_PRODUCT)-$(ILLUSION_VERSION_MAJOR).$(ILLUSION_VERSION_MINOR).$(ILLUSION_VERSION_MAINTENANCE)-$(ILLUSION_VERSION_STATE)
 else
     ILLUSION_VERSION_STATE := UNOFFICIAL
-    ILLUSION_VERSION := Illusion-v$(ILLUSION_VERSION_MAJOR).$(ILLUSION_VERSION_MINOR).$(ILLUSION_VERSION_MAINTENANCE)-$(ILLUSION_VERSION_STATE)
-endif
-
-# goo.im
-ifeq ($(RELEASE),true)
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ro.goo.rom=illusionroms \
-        ro.goo.developerid=itsmikeramsay \
-        ro.goo.version=$(shell date +%Y%m%d)
-else
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ro.goo.rom=illusionromsunofficial \
-        ro.goo.developerid=litsmikeramsay \
-        ro.goo.version=$(shell date +%Y%m%d)
+    ILLUSION_VERSION := $(TARGET_PRODUCT)-$(ILLUSION_VERSION_MAJOR).$(ILLUSION_VERSION_MINOR).$(ILLUSION_VERSION_MAINTENANCE)-$(ILLUSION_VERSION_STATE)
 endif
 
 # product
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.illusion.version=$(ILLUSION_VERSION)
+    ro.illusion.version=$(ILLUSION_VERSION) \
+    ro.modversion=$(ILLUSION_VERSION)
 
 -include vendor/illusion/sepolicy/sepolicy.mk
